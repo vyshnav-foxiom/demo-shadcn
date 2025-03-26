@@ -16,21 +16,20 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 
-const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
+const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData, editData, setEditData }) => {
 
-    console.log(isOpen, "modal")
-    console.log("length", data.length)
+    //console.log("editData", editData)
     const initialValues = {
-        id: "",
-        name: "",
-        age: "",
-        place: "",
-        phone: "",
+        id: editData?.id || "",
+        name: editData?.name || "",
+        age: editData?.age || "",
+        place: editData?.place || "",
+        phone: editData?.phone || "",
     }
     const handleSubmit = (values) => {
         const len = data.length
         console.log("submitted", len)
-        
+
         setData(prev => [
             ...prev,
             {
@@ -39,6 +38,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
 
             }
         ])
+        setEditData(null)
         setIsOpen(false)
     }
     return (
@@ -48,7 +48,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent className="sm:max-w-md ">
                     <DialogHeader>
-                        <DialogTitle className="flex justify-center">Add Employee</DialogTitle>
+                        <DialogTitle className="flex justify-center">{editData ? 'Edit Employee' : 'Add Employee'}</DialogTitle>
                         <DialogDescription>
 
                         </DialogDescription>
@@ -60,6 +60,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
                             <Formik
                                 initialValues={initialValues}
                                 onSubmit={handleSubmit}
+                                enableReinitialize
                             >
                                 {
                                     ({ handleChange, values, handleBlur, submitForm }) => {
@@ -77,6 +78,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
                                                         Placeholder="Enter Name"
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        value={values.name}
                                                     />
                                                     <Input
                                                         name="age"
@@ -84,6 +86,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
                                                         Placeholder="Enter Age"
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        value={values.age}
                                                     />
                                                     <Input
                                                         name="place"
@@ -91,6 +94,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
                                                         Placeholder="Enter Place"
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        value={values.place}
                                                     />
                                                     <Input
                                                         name="phone"
@@ -98,6 +102,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData }) => {
                                                         Placeholder="Enter Phone"
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        value={values.phone}
                                                     />
                                                     <Button
                                                         onClick={submitForm}

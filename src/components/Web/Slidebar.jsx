@@ -46,7 +46,15 @@ const Slidebar = () => {
                 <SidebarHeader />
                 <SidebarContent>
                     <SidebarGroup>
-                        <SidebarGroupLabel>Application</SidebarGroupLabel>
+                        <SidebarGroupLabel>
+                            <div className="flex pb-2">
+                                <img
+                                    src="/src/assets/foxiom-logo2.png"
+                                    alt="Logo"
+                                    style={{ width: "24px", height: "24px", marginRight: "8px" }}
+                                /><span className="text-lg">Foxiom</span>
+                            </div>
+                        </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {items.map((item) => (
@@ -56,7 +64,7 @@ const Slidebar = () => {
                                                 <item.icon />
                                                 <span>{item.title}</span>
                                             </a>
-                                        </SidebarMenuButton> 
+                                        </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 ))}
                             </SidebarMenu>
