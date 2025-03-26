@@ -1,0 +1,10 @@
+
+{
+    "compilerOptions": {
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    }
+  }
+  //       ../../lib/utils   @/src/lib/utils
+  
