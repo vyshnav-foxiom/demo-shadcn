@@ -22,7 +22,7 @@ const user = localStorage.getItem('user')
   return (
     // <div className="">
     <nav
-      className={`flex items-center justify-between p-4 shadow-md `}
+      className={`flex  items-center justify-between p-4 shadow-md`}
     >
       {/* Logo  */}
       <div className=" text-xl font-semibold">Foxiom</div>

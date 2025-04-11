@@ -22,7 +22,7 @@ const Layout = () => {
         {/* Navbar on the right */}
         <div className="flex-1 flex flex-col ">
           <Navbar openSidebar={openSidebar} />
-          <div className=''>
+          <div className='mt-8'>
             <Outlet />
           </div>
         </div>

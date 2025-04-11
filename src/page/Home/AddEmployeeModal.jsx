@@ -27,19 +27,29 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData, editData, setEditD
         phone: editData?.phone || "",
     }
     const handleSubmit = (values) => {
-        const len = data.length
-        console.log("submitted", len)
+        if (editData) {
+            // Update existing employee data
+            setData(prev =>
+                prev.map(item =>
+                    item.id === editData.id ? { ...values, id: editData.id } : item
+                )
+            );
+        } else {
+            // Add new employee data
+            setData(prev => [
+                ...prev,
+                {
+                    ...values,
+                    id: prev.length + 1, // or any unique id generation logic
+                }
+            ]);
+        }
+        setEditData(null);
+        setIsOpen(false);
+    }
 
-        setData(prev => [
-            ...prev,
-            {
-                ...values,
-                id: len,
-
-            }
-        ])
-        setEditData(null)
-        setIsOpen(false)
+    const handleClose = () => {
+        setEditData(null);
     }
     return (
         <div className='flex items-center justify-center min-w-[200px]'>
@@ -121,7 +131,7 @@ const AddEmployeeModal = ({ isOpen, setIsOpen, data, setData, editData, setEditD
                     </div>
                     <DialogFooter className="sm:justify-start">
                         <DialogClose asChild>
-                            <Button type="button" className="bg-red-600 hover:bg-red-500 w-full">
+                            <Button onClick={handleClose} type="button" className="bg-red-600 hover:bg-red-500 w-full">
                                 Close
                             </Button>
                         </DialogClose>
